@@ -10,6 +10,12 @@ import {
 } from "../constant";
 import { useState } from "react";
 
+declare global {
+  interface Window {
+    inputPriceModal: HTMLDialogElement;
+  }
+}
+
 const InputModal = ({ productPrice }: { productPrice: string }) => {
   const postPrice = (price: string) => {
     const numPrice = Number(price);
@@ -28,11 +34,11 @@ const InputModal = ({ productPrice }: { productPrice: string }) => {
     <>
       <button
         className="btn btn-primary"
-        onClick={() => window.my_modal_1.showModal()}
+        onClick={() => window.inputPriceModal.showModal()}
       >
         {BID}
       </button>
-      <dialog id="my_modal_1" className="modal">
+      <dialog id="inputPriceModal" className="modal">
         <form method="dialog" className="modal-box">
           <h3 className="mb-3 text-lg font-bold">{INPUT_BID}</h3>
           <input
