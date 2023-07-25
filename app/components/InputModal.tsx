@@ -1,11 +1,27 @@
 "use client";
 
-import { BID, INPUT_BID, INPUT_COST, CLOSE } from "../constant";
-import { MouseEventHandler, useState } from "react";
+import {
+  BID,
+  INPUT_BID,
+  INPUT_COST,
+  CLOSE,
+  LOWER_THAN_PRICE,
+  ONLY_NUMBER,
+} from "../constant";
+import { useState } from "react";
 
-const InputModal = () => {
-  const postPrice = (price: string): MouseEvent<HTMLButtonElement> => {
-    console.log(BID, price);
+const InputModal = ({ productPrice }: { productPrice: string }) => {
+  const postPrice = (price: string) => {
+    const numPrice = Number(price);
+    const numProductPrice = Number(productPrice);
+
+    if (numPrice < numProductPrice) {
+      alert(LOWER_THAN_PRICE);
+    } else if (isNaN(numPrice)) {
+      alert(ONLY_NUMBER);
+    } else {
+      setInput("");
+    }
   };
   const [input, setInput] = useState("");
   return (
@@ -27,7 +43,7 @@ const InputModal = () => {
             className="w-full max-w-lg input input-bordered"
           />
           <div className="modal-action">
-            <button className="btn" onClick={postPrice(input)}>
+            <button className="btn" onClick={() => postPrice(input)}>
               {BID}
             </button>
             <button className="btn">{CLOSE}</button>

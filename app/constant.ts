@@ -8,4 +8,6 @@ export const BID = "입찰하기";
 export const INPUT_BID = "입찰가격 입력";
 export const INPUT_COST = "가격을 입력하세요.";
 export const CLOSE = "닫기";
+export const LOWER_THAN_PRICE = "입력한 가격 현재 가격보다 낮습니다.";
+export const ONLY_NUMBER = "숫자만 입력 가능합니다.";
 export const MAKEPRICE = (price: number) => `₩ ${price.toLocaleString()}원`;

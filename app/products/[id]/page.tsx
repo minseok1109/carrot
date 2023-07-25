@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       <div>{product.description}</div>
       <div>{MAKEPRICE(product.price)}</div>
-      <InputModal />
+      <InputModal productPrice={product.price} />
     </div>
   );
 }

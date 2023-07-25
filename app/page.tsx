@@ -1,10 +1,12 @@
-import { getProductsData } from "@/utils/api";
+import { getProductsData, getTest } from "@/utils/api";
 import { Product } from "@/utils/type";
 import Image from "next/image";
 import Link from "next/link";
 import { MAKEPRICE } from "./constant";
 
 export default async function Home() {
+  const test = await getTest();
+  console.log("🚀 ~ file: page.tsx:9 ~ Home ~ test:", test);
   const { products } = await getProductsData();
   return (
     <main className="flex flex-col items-center justify-between min-h-screen p-24">
