@@ -9,11 +9,6 @@ const KakaoRedirect = () => {
   const params = useSearchParams();
   const code = params.get("code");
 
-  //send code to server
-  //server will send back access token
-  //store access token in cookie
-  //redirect to home page
-
   useEffect(() => {
     const fetchData = async () => {
       try {
