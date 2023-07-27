@@ -11,3 +11,10 @@ export interface Product {
   thumbnail: string;
   images: string[];
 }
+
+export interface ImgInfo {
+  blob: Blob;
+  name: string;
+  size: number;
+  type: string;
+}
