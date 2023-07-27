@@ -36,10 +36,6 @@ const InputModal = ({
   const postPrice = (price: string) => {
     //TODO: 서버에 입찰가격 전송해야 함 (socket.io or rest api)
     const numPrice = Number(price);
-    console.log(
-      "🚀 ~ file: InputModal.tsx:32 ~ postPrice ~ numPrice:",
-      numPrice
-    );
     const numProductPrice = Number(productPrice);
 
     if (numPrice < numProductPrice) {

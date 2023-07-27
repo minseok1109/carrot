@@ -9,7 +9,7 @@ import {
 } from "../constant";
 
 const Header = () => {
-  const isLogin = true;
+  const isLogin = false;
   return (
     <div className="sticky top-0 z-10 navbar bg-base-100">
       <div className="flex-1">
