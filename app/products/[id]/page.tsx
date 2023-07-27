@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: { params: { id: string } }) {
   const product = await getProductData(params);
   return (
-    <div className="container">
+    <>
       <div className="max-w-[63rem] min-w-fit p-4 space-x-4 carousel bg-neutral rounded-box">
         <div className="carousel-item">
           {product &&
@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       <div>{product.description}</div>
       <div>{MAKEPRICE(product.price)}</div>
-      <InputModal productPrice={product.price} />
-    </div>
+      <InputModal productPrice={product.price} productId={params.id} />
+    </>
   );
 }

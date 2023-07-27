@@ -4,6 +4,7 @@ import { ImgInfo } from "@/utils/type";
 import { useState } from "react";
 import UploadImagesToS3 from "@/utils/uploadImageToS3";
 import axios from "axios";
+import { ONLY_INPUT_NUMBER } from "@/app/constant";
 
 interface FormData {
   title: string;
@@ -109,7 +110,7 @@ export default function Page() {
             onChange={handleChange}
             value={formData.min_price}
           />
-          {priceError && <p className="text-red-500">숫자만 입력해주세요.</p>}
+          {priceError && <p className="text-red-500">{ONLY_INPUT_NUMBER}</p>}
           <label className="label">
             <span className="label-text">마감기한</span>
           </label>
