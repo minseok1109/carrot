@@ -3,7 +3,7 @@ import Link from "next/link";
 import { KAKAO_AUTHCODE } from "../constant";
 
 const Header = () => {
-  const isLogin = false;
+  const isLogin = true;
   return (
     <div className="sticky top-0 z-10 navbar bg-base-100">
       <div className="flex-1">
