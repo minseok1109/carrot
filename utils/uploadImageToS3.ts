@@ -28,7 +28,6 @@ const UploadImagesToS3 = async (imgList: ImgInfo[]) => {
           if (upLoadError) {
             reject(upLoadError);
           } else if (data && data.Location) {
-            console.log("data: ", data);
             resolve(data.Location);
           } else {
             reject(new Error("S3 Upload Error"));

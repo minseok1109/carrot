@@ -1,5 +1,6 @@
 "use client";
 
+import socket from "@/utils/socket";
 import {
   BID,
   INPUT_BID,
@@ -8,7 +9,7 @@ import {
   LOWER_THAN_PRICE,
   ONLY_NUMBER,
 } from "../constant";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 declare global {
   interface Window {
@@ -16,8 +17,24 @@ declare global {
   }
 }
 
-const InputModal = ({ productPrice }: { productPrice: string }) => {
+const InputModal = ({
+  productPrice,
+  productId,
+}: {
+  productPrice: string;
+  productId: string;
+}) => {
+  const [bidPrice, setBidPrice] = useState("");
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("socket connected");
+    });
+    socket.emit("send bid price", { id: productId, price: bidPrice });
+  });
+
   const postPrice = (price: string) => {
+    //TODO: 서버에 입찰가격 전송해야 함 (socket.io or rest api)
     const numPrice = Number(price);
     const numProductPrice = Number(productPrice);
 
@@ -26,10 +43,10 @@ const InputModal = ({ productPrice }: { productPrice: string }) => {
     } else if (isNaN(numPrice)) {
       alert(ONLY_NUMBER);
     } else {
-      setInput("");
+      setBidPrice("");
     }
   };
-  const [input, setInput] = useState("");
+
   return (
     <>
       <button
@@ -43,13 +60,13 @@ const InputModal = ({ productPrice }: { productPrice: string }) => {
           <h3 className="mb-3 text-lg font-bold">{INPUT_BID}</h3>
           <input
             type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            value={bidPrice}
+            onChange={(e) => setBidPrice(e.target.value)}
             placeholder={INPUT_COST}
             className="w-full max-w-lg input input-bordered"
           />
           <div className="modal-action">
-            <button className="btn" onClick={() => postPrice(input)}>
+            <button className="btn" onClick={() => postPrice(bidPrice)}>
               {BID}
             </button>
             <button className="btn">{CLOSE}</button>
