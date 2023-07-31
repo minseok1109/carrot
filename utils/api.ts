@@ -1,8 +1,14 @@
 import { PRODUCTS_URL, PRODUCT_URL } from "@/app/constant";
-import { headers } from "next/dist/client/components/headers";
+import { cookies } from "next/headers";
 
 export const getProductsData = async () => {
-  const res = await fetch(PRODUCTS_URL);
+  const accessToken = cookies().get("accessToken")?.value;
+
+  const res = await fetch(PRODUCTS_URL, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -11,7 +17,12 @@ export const getProductsData = async () => {
 };
 
 export const getProductData = async (params: { id: string }) => {
-  const res = await fetch(PRODUCT_URL(params.id));
+  const accessToken = cookies().get("accessToken")?.value;
+  const res = await fetch(PRODUCT_URL(params.id), {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -19,10 +30,11 @@ export const getProductData = async (params: { id: string }) => {
   return res.json();
 };
 
-export const getTest = async () => {
-  const res = await fetch("https://backendkwon.shop/", {
+export const getUser = async () => {
+  const accessToken = cookies().get("accessToken")?.value;
+  const res = await fetch("http://localhost:5000/auth/user", {
     headers: {
-      Accept: "application/json",
+      Authorization: `Bearer ${accessToken}`,
     },
   });
   if (!res.ok) {

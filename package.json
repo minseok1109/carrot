@@ -16,6 +16,7 @@
     "aws-sdk": "^2.1423.0",
     "axios": "^1.4.0",
     "cookies-next": "^2.1.2",
+    "dayjs": "^1.11.9",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.12",
     "next": "13.4.12",

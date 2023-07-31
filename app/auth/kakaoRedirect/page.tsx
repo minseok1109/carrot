@@ -12,22 +12,21 @@ const KakaoRedirect = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          "https://backendkwon.shop/auth/login",
-          {
-            authCode: code,
-          }
-        );
-
-        // const { accessToken, refreshToken } = response.data.data;
-        setCookie("accessToken", "test");
+        const response = await axios.post("http://localhost:5000/auth/login", {
+          authCode: code,
+        });
+        const { access_token } = response.data.accessToken;
+        axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
+        setCookie("accessToken", access_token);
+        const userInfo = await axios.get("http://localhost:5000/auth/user");
+        localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-    router.push("/");
+    router.replace("/");
   }, [code, router]);
 };
 

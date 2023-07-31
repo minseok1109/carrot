@@ -1,15 +1,15 @@
 export interface Product {
-  id: number;
+  user_id: number;
+  post_id: number;
   title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
+  content: string;
+  photo_ip: string[];
+  min_price: number;
+  biz_count: number;
+  biz_price: number;
+  dueToDate: string;
+  is_sold: boolean;
+  createdAt: string;
 }
 
 export interface ImgInfo {
@@ -17,4 +17,10 @@ export interface ImgInfo {
   name: string;
   size: number;
   type: string;
+}
+
+export interface User {
+  user_id: number;
+  nickname: string;
+  profile: string;
 }

@@ -20,18 +20,13 @@ declare global {
 const InputModal = ({
   productPrice,
   productId,
+  userId,
 }: {
-  productPrice: string;
+  productPrice: number;
   productId: string;
+  userId: number;
 }) => {
   const [bidPrice, setBidPrice] = useState("");
-
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("socket connected");
-    });
-    socket.emit("send bid price", { id: productId, price: bidPrice });
-  });
 
   const postPrice = (price: string) => {
     //TODO: 서버에 입찰가격 전송해야 함 (socket.io or rest api)
@@ -45,6 +40,11 @@ const InputModal = ({
     } else {
       setBidPrice("");
     }
+    socket.emit("sendPrice", {
+      user_id: userId,
+      post_id: productId,
+      price: Number(bidPrice),
+    });
   };
 
   return (
