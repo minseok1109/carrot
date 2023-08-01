@@ -4,16 +4,16 @@ import { cookies } from "next/headers";
 export const getProductsData = async () => {
   const accessToken = cookies().get("accessToken")?.value;
 
-  const res = await fetch(PRODUCTS_URL, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
+  try {
+    const res = await fetch(PRODUCTS_URL, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.error(error);
   }
-
-  return res.json();
 };
 
 export const getProductData = async (params: { id: string }) => {

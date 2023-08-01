@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-// import { cookies } from "next/headers";
 
 import {
   KAKAO_AUTHCODE,
@@ -16,7 +15,6 @@ interface UserPrpos {
 }
 
 const Header = ({ user, isLoggedIn }: UserPrpos) => {
-  // console.log(user?.user_id !== 0);
   return (
     <div className="sticky top-0 z-10 navbar bg-base-100">
       <div className="flex-1">

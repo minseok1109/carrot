@@ -5,6 +5,13 @@ import duration from "dayjs/plugin/duration";
 import { useState, useEffect, useCallback } from "react";
 dayjs.extend(duration);
 
+declare module "react" {
+  // augment CSSProperties here
+  interface CSSProperties {
+    "--value"?: number;
+  }
+}
+
 const Timer = ({ dueToDate }: { dueToDate: string }) => {
   const dueToTime = dayjs(dueToDate, "YYYY-MM-DDTHH:mm:ss");
 

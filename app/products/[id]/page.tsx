@@ -38,6 +38,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         <Timer dueToDate={product.dueToDate} />
       </div>
       <Footer
+        productBizPrice={product.biz_price}
         productPrice={product.min_price}
         productId={product.post_id}
         userId={user.user_id}
