@@ -8,7 +8,7 @@ import { cookies } from "next/headers";
 import { User } from "@/utils/type";
 
 const inter = Inter({ subsets: ["latin"] });
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "상한 당근",
   description: "중고거래를 경매로 바꾸다",

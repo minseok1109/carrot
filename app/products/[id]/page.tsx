@@ -7,7 +7,6 @@ import Image from "next/image";
 
 export async function generateStaticParams() {
   const products = await fetch(PRODUCTS_URL).then((res) => res.json());
-  console.log(products);
   return (
     products &&
     products.map((product: Product) => ({
