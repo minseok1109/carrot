@@ -11,7 +11,7 @@ const Card = ({ product }: Props) => {
     <div className="flex w-[62.5rem] h-full my-5 shadow-xl card card-side bg-base-100">
       <figure>
         <Image
-          src={product.photo_ip[0]}
+          src={product?.photo_ip[0]}
           width={300}
           height={300}
           alt="Movie"
@@ -19,7 +19,7 @@ const Card = ({ product }: Props) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{product.title}</h2>
+        <h2 className="card-title">{product?.title}</h2>
         <p>{product.content}</p>
         <PriceButton product={product} />
       </div>

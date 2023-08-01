@@ -8,7 +8,7 @@ import Image from "next/image";
 export async function generateStaticParams() {
   const products = await fetch(PRODUCTS_URL).then((res) => res.json());
   return products?.map((product: Product) => ({
-    id: product.post_id.toString(),
+    id: product?.post_id.toString(),
   }));
 }
 
