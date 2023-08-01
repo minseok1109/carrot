@@ -1,23 +1,25 @@
 "use client";
 
-import { ImgInfo } from "@/utils/type";
-import { useState } from "react";
+import { ImgInfo, User } from "@/utils/type";
+import { useEffect, useState } from "react";
 import UploadImagesToS3 from "@/utils/uploadImageToS3";
+import { useRouter } from "next/navigation";
 import axios from "axios";
-import { ONLY_INPUT_NUMBER } from "@/app/constant";
+import { ONLY_INPUT_NUMBER, URL } from "@/app/constant";
 
 interface FormData {
   title: string;
-  min_price: string;
+  min_price: number;
   content: string;
   dueToDate: string;
   photo_ip: ImgInfo[];
 }
 
 export default function Page() {
+  const router = useRouter();
   const initialState: FormData = {
     title: "",
-    min_price: "",
+    min_price: 0,
     content: "",
     dueToDate: "",
     photo_ip: [],
@@ -25,6 +27,14 @@ export default function Page() {
 
   const [formData, setFormData] = useState(initialState);
   const [priceError, setPriceError] = useState(false);
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    const user = localStorage.getItem("userInfo");
+    if (user) {
+      setUser(JSON.parse(user));
+    }
+  }, []);
 
   const handlePostProductImage = async (
     e: React.ChangeEvent<HTMLInputElement>
@@ -63,11 +73,14 @@ export default function Page() {
         setPriceError(true);
       }
 
-      const result = { ...formData, photo_ip: res };
-      //TODO: s3에 이미지 업로드 후, 이미지 url을  백엔드로 전송
-      await axios.post("...", { result });
+      await axios.post(`${URL}/post/posts`, {
+        ...formData,
+        photo_ip: res,
+        user_id: user?.user_id,
+      });
       setFormData(initialState);
       setPriceError(false);
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSearchParams, useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
 import { useEffect } from "react";
+import { URL } from "@/app/constant";
 
 const KakaoRedirect = () => {
   const router = useRouter();
@@ -12,22 +13,21 @@ const KakaoRedirect = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post(
-          "https://backendkwon.shop/auth/login",
-          {
-            authCode: code,
-          }
-        );
-
-        // const { accessToken, refreshToken } = response.data.data;
-        setCookie("accessToken", "test");
+        const response = await axios.post(`${URL}/auth/login`, {
+          authCode: code,
+        });
+        const { access_token } = response.data.accessToken;
+        axios.defaults.headers.common.Authorization = `Bearer ${access_token}`;
+        setCookie("accessToken", access_token);
+        const userInfo = await axios.get(`${URL}/auth/user`);
+        localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-    router.push("/");
+    router.replace("/");
   }, [code, router]);
 };
 

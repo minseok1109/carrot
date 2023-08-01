@@ -1,27 +1,17 @@
-"use client";
-
 import { Product } from "@/utils/type";
 import Image from "next/image";
-import { MAKEPRICE } from "../constant";
-import { useEffect } from "react";
-import socket from "@/utils/socket";
+import PriceButton from "./PriceButton";
 
 interface Props {
   product: Product;
 }
 
 const Card = ({ product }: Props) => {
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("socket connected");
-    });
-  });
-
   return (
     <div className="flex w-[62.5rem] h-full my-5 shadow-xl card card-side bg-base-100">
       <figure>
         <Image
-          src={product.thumbnail}
+          src={product?.photo_ip[0]}
           width={300}
           height={300}
           alt="Movie"
@@ -29,11 +19,9 @@ const Card = ({ product }: Props) => {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{product.title}</h2>
-        <p>{product.description}</p>
-        <div className="justify-end card-actions">
-          <span className="btn btn-primary">{MAKEPRICE(product.price)}</span>
-        </div>
+        <h2 className="card-title">{product?.title}</h2>
+        <p>{product.content}</p>
+        <PriceButton product={product} />
       </div>
     </div>
   );
