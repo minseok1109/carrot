@@ -3,7 +3,7 @@ export const KAKAO_AUTHCODE = `https://kauth.kakao.com/oauth/authorize?response_
 export const URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:5000"
-    : "https://backendkwon.shop/";
+    : "https://backendkwon.shop";
 
 export const PRODUCTS_URL = `${URL}/post/posts`;
 export const PRODUCT_URL = (id: string) => `${URL}/post/posts/${id}`;
