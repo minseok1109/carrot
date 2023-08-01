@@ -1,4 +1,4 @@
-import { PRODUCTS_URL, PRODUCT_URL } from "@/app/constant";
+import { PRODUCTS_URL, PRODUCT_URL, URL } from "@/app/constant";
 import { cookies } from "next/headers";
 
 export const getProductsData = async () => {
@@ -32,7 +32,7 @@ export const getProductData = async (params: { id: string }) => {
 
 export const getUser = async () => {
   const accessToken = cookies().get("accessToken")?.value;
-  const res = await fetch("http://localhost:5000/auth/user", {
+  const res = await fetch(`${URL}/auth/user`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import UploadImagesToS3 from "@/utils/uploadImageToS3";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { ONLY_INPUT_NUMBER } from "@/app/constant";
+import { ONLY_INPUT_NUMBER, URL } from "@/app/constant";
 
 interface FormData {
   title: string;
@@ -73,7 +73,7 @@ export default function Page() {
         setPriceError(true);
       }
 
-      await axios.post("http://localhost:5000/post/posts", {
+      await axios.post(`${URL}/post/posts`, {
         ...formData,
         photo_ip: res,
         user_id: user?.user_id,
