@@ -15,6 +15,8 @@ interface UserPrpos {
 }
 
 const Header = ({ user, isLoggedIn }: UserPrpos) => {
+  console.log(KAKAO_AUTHCODE);
+  console.log("redirect_url: ", process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI);
   return (
     <div className="sticky top-0 z-10 navbar bg-base-100">
       <div className="flex-1">
