@@ -23,7 +23,7 @@ const InputModal = ({
   userId,
 }: {
   productPrice: number;
-  productId: string;
+  productId: number;
   userId: number;
 }) => {
   const [bidPrice, setBidPrice] = useState("");

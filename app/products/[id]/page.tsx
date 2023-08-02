@@ -3,6 +3,7 @@ import Timer from "@/app/components/Timer";
 import { PRODUCTS_URL } from "@/app/constant";
 import { getProductData, getUser } from "@/utils/api";
 import { Product } from "@/utils/type";
+import Chart from "@/app/components/Chart";
 import Image from "next/image";
 
 export async function generateStaticParams() {
@@ -16,7 +17,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const product = await getProductData(params);
+  const product: Product = await getProductData(params);
   const user = await getUser();
 
   return (
@@ -40,6 +41,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex justify-center mt-10">
         <Timer dueToDate={product.dueToDate} />
       </div>
+      <Chart productId={product.post_id} />
       <Footer
         productBizPrice={product.biz_price}
         productPrice={product.min_price}

@@ -57,7 +57,6 @@ export default function Page() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    console.log(formData);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
