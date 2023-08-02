@@ -41,7 +41,11 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="flex justify-center mt-10">
         <Timer dueToDate={product.dueToDate} />
       </div>
-      <Chart productId={product.post_id} />
+      <div className="w-[600px] max-w-[400px]  overflow-hidden hover:overflow-x-scroll">
+        <div>
+          <Chart productId={product.post_id} />
+        </div>
+      </div>
       <Footer
         productBizPrice={product.biz_price}
         productPrice={product.min_price}

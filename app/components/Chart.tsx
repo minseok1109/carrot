@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -28,6 +28,7 @@ interface ChartDataState {
   labels: string[];
   datasets: {
     label: string;
+    yAxisID?: string;
     data: number[];
     borderColor: string;
     backgroundColor: string;
@@ -50,6 +51,11 @@ const options = {
   animation: {
     duration: 0,
   },
+  scales: {
+    "y-right": {
+      position: "right",
+    },
+  },
   plugins: {
     legend: {
       position: "top" as const,
@@ -58,11 +64,13 @@ const options = {
 };
 
 function Chart({ productId }: { productId: number }) {
+  const chartRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<ChartDataState>({
     labels: [],
     datasets: [
       {
         label: "실시간 입찰 가격",
+        yAxisID: "y-right",
         data: [],
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -83,6 +91,7 @@ function Chart({ productId }: { productId: number }) {
         datasets: [
           {
             label: "실시간 입찰 가격",
+            yAxisID: "y-right",
             data: prices,
             borderColor: "rgb(255, 99, 132)",
             backgroundColor: "rgba(255, 99, 132, 0.5)",
@@ -94,6 +103,11 @@ function Chart({ productId }: { productId: number }) {
   }, [productId]);
 
   useEffect(() => {
+    const scrollToleft = () => {
+      const chart = chartRef.current;
+      chart?.scrollIntoView();
+    };
+
     const interval = setInterval(async () => {
       const result = await axios.get(`${URL}/post/posts/realtime/${productId}`);
       const { data } = result;
@@ -116,12 +130,19 @@ function Chart({ productId }: { productId: number }) {
           ],
         };
       });
+      scrollToleft();
     }, 1500);
+    scrollToleft();
 
     return () => clearInterval(interval);
   }, [productId]);
 
-  return <Line options={options} data={data} width={600} height={600} />;
+  return (
+    <div className="flex">
+      <Line options={options as any} data={data} width={600} height={600} />
+      <div ref={chartRef} />
+    </div>
+  );
 }
 
 export default Chart;
