@@ -1,6 +1,6 @@
 "use client";
 
-import { ImgInfo, User } from "@/utils/type";
+import { ImgInfo, User } from "@/utils/types";
 import { useEffect, useState } from "react";
 import UploadImagesToS3 from "@/utils/uploadImageToS3";
 import { useRouter } from "next/navigation";

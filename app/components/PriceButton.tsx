@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/utils/type";
+import { Product } from "@/utils/types";
 import { MAKEPRICE } from "../constant";
 import { useEffect, useState } from "react";
 import socket from "@/utils/socket";

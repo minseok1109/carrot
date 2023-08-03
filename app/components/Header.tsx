@@ -8,7 +8,7 @@ import {
   MAIN_NAME,
   SELLING,
 } from "../constant";
-import { User } from "@/utils/type";
+import { User } from "@/utils/types";
 interface UserPrpos {
   user: User | undefined;
   isLoggedIn: boolean;

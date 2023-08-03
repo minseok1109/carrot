@@ -1,5 +1,5 @@
 import { getProductsData } from "@/utils/api";
-import { Product } from "@/utils/type";
+import { Product } from "@/utils/types";
 import Link from "next/link";
 import Card from "./components/Card";
 

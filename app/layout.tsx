@@ -5,7 +5,7 @@ import axios from "axios";
 import Header from "./components/Header";
 import { getUser } from "@/utils/api";
 import { cookies } from "next/headers";
-import { User } from "@/utils/type";
+import { User } from "@/utils/types";
 
 const inter = Inter({ subsets: ["latin"] });
 export const dynamic = "force-dynamic";

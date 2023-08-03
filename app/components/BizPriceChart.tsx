@@ -63,17 +63,25 @@ const options = {
   },
 };
 
-function Chart({ productId }: { productId: number }) {
+function BizPriceChart({
+  productId,
+  label,
+  lineColor,
+}: {
+  productId: number;
+  label: string;
+  lineColor: string;
+}) {
   const chartRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<ChartDataState>({
     labels: [],
     datasets: [
       {
-        label: "실시간 입찰 가격",
+        label,
         yAxisID: "y-right",
         data: [],
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: lineColor,
+        backgroundColor: lineColor.split(")").join(", 0.5)"),
       },
     ],
   });
@@ -90,17 +98,17 @@ function Chart({ productId }: { productId: number }) {
         labels,
         datasets: [
           {
-            label: "실시간 입찰 가격",
+            label,
             yAxisID: "y-right",
             data: prices,
-            borderColor: "rgb(255, 99, 132)",
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            borderColor: lineColor,
+            backgroundColor: lineColor.split(")").join(", 0.5)"),
           },
         ],
       });
     };
     fetchData();
-  }, [productId]);
+  }, [productId, lineColor, label]);
 
   useEffect(() => {
     const scrollToleft = () => {
@@ -112,14 +120,11 @@ function Chart({ productId }: { productId: number }) {
       const result = await axios.get(`${URL}/post/posts/realtime/${productId}`);
       const { data } = result;
       setData((prevData) => {
-        //TODO: 5초마다 서버에서 데이터 받아와서 새로운 레이블 추가해야 함
-
         const newLabels = [
           ...prevData.labels,
           dayjs(data.createdAt).format("MM-DD HH:mm"),
         ];
         const newData1 = [...prevData.datasets[0].data, data.biz_price];
-
         return {
           labels: newLabels,
           datasets: [
@@ -145,4 +150,4 @@ function Chart({ productId }: { productId: number }) {
   );
 }
 
-export default Chart;
+export default BizPriceChart;
