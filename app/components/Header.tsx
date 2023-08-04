@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,12 +11,19 @@ import {
   SELLING,
 } from "../constant";
 import { User } from "@/utils/types";
+import { useRouter } from "next/navigation";
 interface UserPrpos {
   user: User | undefined;
   isLoggedIn: boolean;
 }
 
 const Header = ({ user, isLoggedIn }: UserPrpos) => {
+  const router = useRouter();
+  const logOut = () => {
+    localStorage.clear();
+    document.cookie = "accessToken=; expires=Thu, 01 Jan 1999 00:00:10 GMT;";
+    router.push("/");
+  };
   return (
     <div className="sticky top-0 z-10 navbar bg-base-100">
       <div className="flex-1">

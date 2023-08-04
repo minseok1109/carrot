@@ -27,7 +27,7 @@ const KakaoRedirect = () => {
     };
 
     fetchData();
-    router.replace("/");
+    router.push("/");
   }, [code, router]);
 };
 
