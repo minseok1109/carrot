@@ -9,6 +9,10 @@ import UserCountChart from "@/app/components/UserCountChart";
 
 export async function generateStaticParams() {
   const products = await fetch(PRODUCTS_URL).then((res) => res.json());
+  console.log(
+    "🚀 ~ file: page.tsx:12 ~ generateStaticParams ~ products:",
+    products
+  );
   return (
     products &&
     products.map((product: Product) => ({

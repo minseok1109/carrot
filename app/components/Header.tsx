@@ -53,7 +53,7 @@ const Header = ({ user, isLoggedIn }: UserPrpos) => {
                   <Link href="/products/register">{SELLING}</Link>
                 </li>
                 <li>
-                  <a>{LOG_OUT}</a>
+                  <button onClick={() => logOut()}>{LOG_OUT}</button>
                 </li>
               </ul>
             </div>
