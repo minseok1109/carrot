@@ -138,9 +138,6 @@ function UserCountChart({
       chart?.scrollIntoView();
     };
 
-    let currentLabels: string[] = [];
-    let currentUserCount: number[] = [];
-
     const interval = setInterval(async () => {
       const result = await axios.get(`${URL}/post/posts/biz/${productId}`);
       const { data } = result;
