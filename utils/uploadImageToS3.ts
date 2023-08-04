@@ -1,4 +1,4 @@
-import { ImgInfo } from "./type";
+import { ImgInfo } from "./types";
 import AWS from "aws-sdk";
 
 const UploadImagesToS3 = async (imgList: ImgInfo[]) => {

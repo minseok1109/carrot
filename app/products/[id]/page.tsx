@@ -2,8 +2,10 @@ import Footer from "@/app/components/Footer";
 import Timer from "@/app/components/Timer";
 import { PRODUCTS_URL } from "@/app/constant";
 import { getProductData, getUser } from "@/utils/api";
-import { Product } from "@/utils/type";
+import { Product } from "@/utils/types";
 import Image from "next/image";
+import BizPriceChart from "@/app/components/BizPriceChart";
+import UserCountChart from "@/app/components/UserCountChart";
 
 export async function generateStaticParams() {
   const products = await fetch(PRODUCTS_URL).then((res) => res.json());
@@ -16,7 +18,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const product = await getProductData(params);
+  const product: Product = await getProductData(params);
   const user = await getUser();
 
   return (
@@ -39,6 +41,18 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="mt-6 text-xl">{product.content}</div>
       <div className="flex justify-center mt-10">
         <Timer dueToDate={product.dueToDate} />
+      </div>
+      <div className="flex justify-around">
+        <BizPriceChart
+          productId={product.post_id}
+          lineColor="rgb(255, 99, 132)"
+          label="실시간 입찰 가격"
+        />
+        <UserCountChart
+          productId={product.post_id}
+          lineColor="rgb(0, 255, 255)"
+          label="실시간 입찰자 수"
+        />
       </div>
       <Footer
         productBizPrice={product.biz_price}

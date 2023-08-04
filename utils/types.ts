@@ -24,3 +24,26 @@ export interface User {
   nickname: string;
   profile: string;
 }
+
+export interface BizPriceType {
+  biz_id: number;
+  biz_price: number;
+  createdAt: string;
+  post_id: number;
+  user_id: number;
+}
+
+export interface ChartDataState {
+  labels: string[];
+  datasets: {
+    label: string;
+    yAxisID?: string;
+    data: number[];
+    borderColor: string;
+    backgroundColor: string;
+  }[];
+}
+
+export interface UniqueUserType {
+  [key: number]: boolean;
+}

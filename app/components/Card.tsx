@@ -1,4 +1,4 @@
-import { Product } from "@/utils/type";
+import { Product } from "@/utils/types";
 import Image from "next/image";
 import PriceButton from "./PriceButton";
 

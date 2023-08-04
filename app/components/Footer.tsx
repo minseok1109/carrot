@@ -12,7 +12,7 @@ const Footer = ({
 }: {
   productBizPrice: number;
   productPrice: number;
-  productId: string;
+  productId: number;
   userId: number;
 }) => {
   const [bizPrice, setBizPrice] = useState(productBizPrice);
